@@ -19,7 +19,7 @@
     "morgan": "^1.9.1",
     "mpath": ">=0.5.1",
     "npm": "^10.9.1",
-    "passport": "^0.7.0",
+    "passport": "^0.5.3",
     "passport-facebook": "~2.1.1",
     "passport-google-oauth": "~1.0.0",
     "passport-local": "~1.0.0",
