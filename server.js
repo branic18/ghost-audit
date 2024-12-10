@@ -10,13 +10,9 @@ var flash    = require('connect-flash');
 var morgan       = require('morgan'); // Logging
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser'); // See whats coming with req
-var session      = require('express-session'); // Keep logged in session alive - This is for local testing
-// var session      = require('cookie-session'); // This is to deploy it
+var session      = require('cookie-session'); // This is to deploy it
 
 var configDB = require('./config/database.js');
-
-// const methodOverride = require('method-override')
-// app.use(methodOverride('_method'))
 
 const calculatePrivacyScore = require('./middleware/privacyScore.js');
 
@@ -59,9 +55,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session, sho
 
 
 // launch ======================================================================
-app.listen(3333);
-console.log('The magic happens on port ' + 3333);
 
-// app.listen(port, "0.0.0.0", () => {
-//   console.log(`Server is running on port ${port}`);
-// });
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running on port ${port}`);
+});
