@@ -59,5 +59,5 @@ app.use(flash()); // use connect-flash for flash messages stored in session, sho
 
 
 // launch ======================================================================
-app.listen(3333);
+app.listen("0.0.0.0");
 console.log('The magic happens on port ' + 3333);
