@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Privacy Knowledge</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <% if (testResult && testResult.score != null) { %>
+    <form data-id="testResult._id" action="/redoTest/<%= testResult._id %>?_method=PUT" method="POST">
+        <h1>Test Your Privacy Knowledge</h1>
+
+            <!-- Question 1 -->
+            <div class="question">
+                <label>1. What is a secure way to protect your social media account?</label><br>
+                <input type="radio" name="q1" value="A"> Use a strong password<br>
+                <input type="radio" name="q1" value="B"> Share your password with friends<br>
+                <input type="radio" name="q1" value="C"> Enable two-factor authentication<br> <!-- New Answer -->
+                <input type="radio" name="q1" value="D"> Use the same password across all accounts<br> <!-- New Answer -->
+            </div>
+        
+            <!-- Question 2 -->
+            <div class="question">
+                <label>2. What content do you allow your followers to see on your social media?</label><br>
+                <input type="radio" name="q2" value="A"> Personal details<br>
+                <input type="radio" name="q2" value="B"> Current location<br>
+                <input type="radio" name="q2" value="C"> None of the answers<br>
+                <input type="radio" name="q2" value="D"> Only content I create, nothing personal<br> <!-- New Answer -->
+            </div>
+        
+            <!-- Question 3 -->
+            <div class="question">
+              <label>3. Which of these policies do you pay attention to when reading the terms of service of an app or service?</label><br>
+              <input type="radio" name="q3" value="A"> Policy on data-sharing with third parties<br>
+              <input type="radio" name="q3" value="B"> Policy on data security<br>
+              <input type="radio" name="q3" value="C"> Policy on data collection<br>
+              <input type="radio" name="q3" value="D"> Not Sure<br>
+              <input type="radio" name="q3" value="E"> None I proceed w/o wasting my time on legal information<br>
+            </div>
+        
+            <!-- Question 4 -->
+            <div class="question">
+              <label>4. Which of these is not a privacy feature on Instagram?</label><br>
+              <input type="radio" name="q4" value="A"> Block comments<br>
+              <input type="radio" name="q4" value="B"> Public profile<br>
+              <input type="radio" name="q4" value="C"> Stop direct messages<br>
+              <input type="radio" name="q4" value="D"> Remove a follower<br>
+            </div>
+        
+            <!-- Question 5 -->
+            <div class="question">
+              <label>5. Which of these is usually not kept private on social media?</label><br>
+              <input type="radio" name="q5" value="A"> Photos<br>
+              <input type="radio" name="q5" value="B"> Username<br>
+              <input type="radio" name="q5" value="C"> Invitations<br>
+              <input type="radio" name="q5" value="D"> Followers<br>
+            </div>
+        
+            <button type="submit" id= "goToProfilePage">Submit</button>
+        
+    </form>
+    <% } else { %>
+        <!-- Create a New Test Result -->
+        <form action="/submitTest" method="POST">
+            <h1>Test Your Privacy Knowledge</h1>
+
+            <!-- Question 1 -->
+            <div class="question">
+                <label>1. What is a secure way to protect your social media account?</label><br>
+                <input type="radio" name="q1" value="A"> Use a strong password<br>
+                <input type="radio" name="q1" value="B"> Share your password with friends<br>
+                <input type="radio" name="q1" value="C"> Enable two-factor authentication<br> <!-- New Answer -->
+                <input type="radio" name="q1" value="D"> Use the same password across all accounts<br> <!-- New Answer -->
+            </div>
+        
+            <!-- Question 2 -->
+            <div class="question">
+                <label>2. What content do you allow your followers to see on your social media?</label><br>
+                <input type="radio" name="q2" value="A"> Personal details<br>
+                <input type="radio" name="q2" value="B"> Current location<br>
+                <input type="radio" name="q2" value="C"> None of the answers<br>
+                <input type="radio" name="q2" value="D"> Only content I create, nothing personal<br> <!-- New Answer -->
+            </div>
+        
+            <!-- Question 3 -->
+            <div class="question">
+              <label>3. Which of these policies do you pay attention to when reading the terms of service of an app or service?</label><br>
+              <input type="radio" name="q3" value="A"> Policy on data-sharing with third parties<br>
+              <input type="radio" name="q3" value="B"> Policy on data security<br>
+              <input type="radio" name="q3" value="C"> Policy on data collection<br>
+              <input type="radio" name="q3" value="D"> Not Sure<br>
+              <input type="radio" name="q3" value="E"> None I proceed w/o wasting my time on legal information<br>
+            </div>
+        
+            <!-- Question 4 -->
+            <div class="question">
+              <label>4. Which of these is not a privacy feature on Instagram?</label><br>
+              <input type="radio" name="q4" value="A"> Block comments<br>
+              <input type="radio" name="q4" value="B"> Public profile<br>
+              <input type="radio" name="q4" value="C"> Stop direct messages<br>
+              <input type="radio" name="q4" value="D"> Remove a follower<br>
+            </div>
+        
+            <!-- Question 5 -->
+            <div class="question">
+              <label>5. Which of these is usually not kept private on social media?</label><br>
+              <input type="radio" name="q5" value="A"> Photos<br>
+              <input type="radio" name="q5" value="B"> Username<br>
+              <input type="radio" name="q5" value="C"> Invitations<br>
+              <input type="radio" name="q5" value="D"> Followers<br>
+            </div>
+        
+            <button type="submit" id= "goToProfilePage">Submit</button>
+        </form>
+    <% } %>
+</body>
+</html>
