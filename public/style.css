@@ -1,0 +1,339 @@
+img{
+  height: 600px;
+  margin: 20px 0px;
+}
+
+body {
+  background-color: #0B0F1B;
+  color: #f0f0f0; 
+  font-family: Arial, sans-serif;
+  padding-top:80px;
+  word-wrap:break-word;
+}
+
+p {
+  font-size: 16px;
+}
+
+.profile-container, .test-container {
+  /* max-width: 600px; */
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #161B2D;
+}
+
+body {
+  background-color: #0B0F1B;
+  color: #fffffe; 
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3 {
+  color: #fffffe; 
+}
+
+/*Privacy Score Layout*/
+.top-row h2,
+.top-row p {
+  float: left;
+  width: 30%;
+}
+
+a {
+  text-decoration: none;
+  color: #10d48e; 
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #28efa8;
+}
+
+button {
+  background-color: #10d48e;
+  border: none;
+  color: #060e14;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #28efa8;
+}
+
+/* Container styles */
+.container {
+  width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Profile page styles */
+.profile-container {
+  background-color: #161B2D; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+}
+
+/* Test Result section */
+.test-result {
+  background-color: #204660;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.test-result h2 {
+  color: #fffffe;
+}
+
+.test-result p {
+  color: #fffffe;
+}
+
+/* Login, Signup page styles */
+form {
+  background-color: #132a3a;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-group label {
+  color: #fffffe;
+}
+
+.form-control {
+  background-color: #204660;
+  color: #fffffe;
+  border: 1px solid #10d48e;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: #10d48e;
+  outline: none;
+}
+
+/* Jumbotron */
+#jumbotron {
+  background-color: #132a3a;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#jumbotron h1 {
+  color: #10d48e;
+  font-size: 3rem;
+  margin-bottom: 25px;
+}
+
+#jumbotron img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+#jumbotron p {
+  color: #fffffe;
+  font-size: 1.7rem;
+  margin-top: 15px;
+}
+
+#jumbotron a {
+  margin: 10px;
+}
+
+/* Alerts */
+.alert-danger {
+  background-color: #060e14;
+  color: #ff4d4d; 
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ff4d4d;
+}
+
+/* Button styles for the links */
+.btn-default {
+  background-color: #132a3a;
+  color: #fffffe;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #28efa8;
+  transition: background-color 0.3s ease;
+}
+
+.btn-default:hover {
+  background-color: #28efa8;
+}
+
+.btn-warning {
+  background-color: #ef4928;
+  color: #060e14;
+}
+
+.btn-warning:hover {
+  background-color: #d41d10;
+}
+
+/* General button styles for the forms */
+button[type="submit"] {
+  background-color: #10d48e;
+  border: none;
+  color: #060e14;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #28efa8;
+}
+
+#deleteTestForm {
+  background: none;
+  box-shadow: none;
+  margin-top: 20px;
+  padding: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Results section */
+#results {
+  margin-bottom: 20px;
+}
+
+.add-action-btn {
+  display: block;
+  background-color: #28efa8;
+  color: black;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-action-btn:hover {
+  background-color: #1cb17d;
+}
+
+
+/* Source items */
+.source-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Action Items */
+#actionItemsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.action-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#miip img {
+  height: 10px;
+}
+
+
+/*Navigation Row Layout*/
+.navigation {
+  display: grid;
+  grid: 40px / 20% 20% 40% 10%;
+  /* background: #161B2D; */
+}
+
+.navigation > h1,
+.navigation > a {
+  float: left;
+}
+
+.navigation > h1 {
+  margin: 0px;
+}
+
+.top-row {
+  /* margin: 0 auto; */
+  padding: 0;
+}
+
+.top-row > .profile-container {
+  float: left;
+  width: 45%;
+  margin-right: 3%;
+}
+
+.main-row {
+  width: 100%;
+}
+
+.main-row > .profile-container,
+.main-row > .profile-container + .profile-container {
+  float: left;
+  width: 30%;
+  margin-right: 3%;
+}
+
+.main-row > .profile-container + .profile-container > form > input,
+.main-row > .profile-container + .profile-container > form > button {
+  float: left;
+  margin-right: 10px;
+}
+
+#scan-results {
+  overflow-y: auto;
+  max-height: 30vh;
+}
