@@ -1,0 +1,187 @@
+
+
+<%- include('partials/header') -%>
+<div class="container">
+
+    <div class="navigation">
+        <h1>Ghost Audit</h1>
+        <a>Your Dashboard</a>
+        <a>About Ghost Audit</a>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="top-row">
+
+            <div class="profile-container">
+                <h2>Privacy Score: <%= typeof finalScore !== 'undefined' ? finalScore : 'N/A' %>%</h2>
+                <p style="color: 
+                    <% if (finalScore === 100) { %>green<% } 
+                    else if (finalScore >= 60) { %>yellow<% } 
+                    else if (finalScore >= 30) { %>orange<% } 
+                    else { %>red<% } 
+                    %>;">
+                    <%= typeof status !== 'undefined' ? status : 'Unknown' %>
+                </p>
+                <p><%= typeof description !== 'undefined' ? description : 'No description available.' %></p>
+            </div>
+    
+            <% if (userId) { %>
+                    <div class="profile-container">
+            
+                        <% if (testResult && testResult.score != null) { %>
+            
+                                <h2>Your Privacy Knowledge Score: <%= testResult.score %></h2>
+                                <p><%= testResult.score >= 3 ? 'You are very knowledgeable about digital privacy!' : 'You could improve your digital privacy knowledge.' %></p>
+                                <a href="/test" class="button" id="redoTestButton"><button>Redo Test</button></a>
+            
+                                <form id="deleteTestForm" action="/deleteTest/<%= testResult._id %>?_method=DELETE" method="POST">
+                                    <button type="submit">Delete Test Results</button>
+                                </form>
+                 
+                            <button id="goToTestPage" style="display:none;">Test Your Privacy Knowledge</button>
+                        <% } else { %>
+                            <button id="goToTestPage">Test Your Privacy Knowledge</button>
+                            <p class="test-result" id="testResult">No test results available. Please take the test.</p>
+                        <% } %>
+            
+                    </div>
+            <% } else { %>
+                <p>Please log in to take your test.</p>
+            <% } %>
+    
+    </div>
+    
+    
+    
+    <div class="main-row">
+
+            <div class="profile-container">
+                <h2>IP Stealth Review</h2>
+                <p>Check your IP address to see if it’s detectable while browsing, helping assess privacy risks like revealing your location or identity. This lets you take steps, such as verifying VPN use, to protect your digital privacy.</p>
+                <div id="miipwidget"></div>
+                    <div class="miiplink" id="miipurl">Powered by 
+                        <a href="https://miip.my/" target="_blank">MIIP.my</a>
+                    </div>
+                <script defer src="https://api.miip.my/widget.js"></script> 
+
+                <div class="test-result">
+                    <div id="ip-data"></div>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <h2>Email Leak Checker</h2>
+                <p>An email checker scans if your email is used on websites without your consent, identifying unauthorized access. This helps you take action, like securing accounts, by adding to your action list.</p>
+                <form>
+                    <label for="emailChecker">Enter email or social media username:</label>
+                    <input type="text" id="emailChecker" name="emailChecker" placeholder="hello123@gmail.com"><br>
+
+                    <button type="button" value="Submit" id="checkEmailInput">Scan the web</button>
+                </form>
+                <div class="test-result">
+
+                    <!-- Email History Scan Quick Links-->
+                    <h3>Scan History</h3>
+                    <div id="scan-history">
+                        <% if (scans && scans.length > 0) { %>
+                            <% scans.forEach(scan => { %>
+                                <div class="scan-item">
+                                    <p>
+                                        <a href="/scan-results/<%= scan._id %>"><%= scan.searchId %></a>
+                                        <button class="delete-scan" data-scan-id="<%= scan._id %>">X</button>
+                                    </p>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <p>No scan history found.</p>
+                        <% } %>
+                    </div>
+
+                    
+
+                    
+        
+        
+
+                    <!-- Results List -->
+                    <h3>Search results</h3>
+                        <div id="scan-results">
+                            <% if (results && results.length > 0) { %>
+                                <% results.forEach(result => { %>
+                                    <div class="source-item">
+                                        <p><strong>Source Name:</strong> <%= result.sourceName %></p>
+                                        <p><strong>Source Date:</strong> <%= result.sourceDate %></p>
+                                        <form action="/add-action" method="POST">
+                                            <!-- Pass the scan ID and result-specific data -->
+                                            <input type="hidden" name="scanId" value="<%= scan ? scan._id : '' %>">
+                                            <input type="hidden" name="sourceName" value="<%= result.sourceName %>">
+                                            <input type="hidden" name="sourceDate" value="<%= result.sourceDate %>">
+                                            <button type="submit">Add Action</button>
+                                        </form>
+                                    </div>
+                                <% }); %>
+                            <% } else { %>
+                                <p>No results found for this scan.</p>
+                            <% } %>
+                        </div>
+
+
+                        
+        
+
+
+
+                </div>
+
+            </div>
+                
+
+
+
+
+
+
+
+            <div class="profile-container">
+
+            <!-- Action Items List -->
+            <h3>Action Items</h3>
+            <p>Review each action item for email activity then mark it as complete if email is secured for that source</p>
+                <div id="action-items">
+                    <% if (scans && scans.length > 0) { %>
+                        <% scans.forEach(scan => { %>
+                            <% if (scan.actions && scan.actions.length > 0) { %>
+                                <div class="scan-actions" id="scan-actions-<%= scan._id %>">
+                                    <h4>Actions for <%= scan.searchId %></h4>
+                                    <ul>
+                                        <% scan.actions.forEach(action => { %>
+                                            <li>
+                                                <p><%= action.description %></p>
+                                                <form action="/complete-action" method="POST" style="display: inline;">
+                                                    <input type="hidden" name="scanId" value="<%= scan._id %>">
+                                                    <input type="hidden" name="actionId" value="<%= action._id %>">
+                                                    <button type="submit" class="complete-button">Complete</button>
+                                                </form>
+                                            </li>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                            <% } %>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No action items found.</p>
+                    <% } %>
+                </div>
+
+
+
+            </div>
+
+    </div> <!--Mainn row-->
+    
+      
+
+          
+</div>
+
+<%- include('partials/footer') -%>
