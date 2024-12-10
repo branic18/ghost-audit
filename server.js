@@ -26,7 +26,7 @@ app.use(calculatePrivacyScore);
 
 
 // configuration ===============================================================
-mongoose.connect(configDB.url, { useNewUrlParser: true })
+mongoose.connect(configDB.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to Mongoose");
     console.log(mongoose.version);
