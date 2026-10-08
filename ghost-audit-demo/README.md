@@ -38,6 +38,22 @@ npm start            # serves dist/ and /api on PORT (default 3001)
 
 Requires **Node.js 22+** (`node:sqlite`).
 
+## Railway
+
+This app’s entry file is **`server/index.js`**, not `server.js` (that file belongs to `ghost-audit-original/`).
+
+1. Root Directory: `ghost-audit-demo` (no leading `/`).
+2. In the service **Settings → Deploy**, set **Custom Start Command** to:
+
+```bash
+npm start
+```
+
+If it still says `Cannot find module '/app/server.js'`, the service has an old start command. Clear it or replace it with `npm start` / `node server/index.js`, then redeploy.
+
+3. Build command: `npm install && npm run build`
+4. Variable: `NIXPACKS_NODE_VERSION=22`
+
 ## Demo emails (do not use a real address)
 
 This demo uses **synthetic** breach records. Do not type a personal inbox.

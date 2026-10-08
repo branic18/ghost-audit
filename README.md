@@ -69,6 +69,8 @@ npm run build
 npm run preview
 ```
 
+Railway: set **Root Directory** to `ghost-audit-demo` and **Start Command** to `npm start` (entry is `server/index.js`, not `server.js`). See [ghost-audit-demo/README.md](ghost-audit-demo/README.md).
+
 ### ghost-audit-design-system
 
 ```bash

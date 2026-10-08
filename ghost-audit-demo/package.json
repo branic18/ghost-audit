@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "server/index.js",
   "description": "Ghost Audit — data breach audit & remediation dashboard prototype (Figma-faithful React implementation).",
   "engines": {
     "node": ">=22.13.0"
