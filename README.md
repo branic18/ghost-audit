@@ -1,27 +1,85 @@
-# Ghost Audit 👻
+# Ghost Audit
 
-Ghost Audit is a user-friendly consumer privacy audit tool that ensures digital protection by scanning for and provide active recommendations on how you can better protect your digital identity
+**Ghost Audit** is a consumer privacy tool: one place to understand your exposure, see what leaked, and get clear steps to protect yourself. This repo is an ongoing experiment in building that kind of product **without putting basic safety behind a paywall**. Privacy and breach awareness shouldn’t be a luxury—you shouldn’t have to pay just to find out whether your data is at risk or what to do about it.
 
-## Features
-- Privacy Score: A comprehensive overview of your online privacy, scoring your security and data protection measures to highlight areas for improvement.
-- Privacy Knowledge Test: An interactive quiz to assess your understanding of privacy practices, helping you identify gaps in your knowledge and improve your digital security awareness.
-- IP Stealth Review/Test: Automatically generates and reviews your IP information, assessing your online anonymity and so you can highlight any exposure risks related to your IP address.
-- Email Leak Checker: Scans the web for potential breaches involving your email address, alerting you to any compromised accounts or exposed personal information.
-- Action Items List: A personalized list of steps to enhance your privacy and security, providing clear, actionable recommendations based on your audit results.
+The work here is a real attempt at that idea, not a throwaway mockup: multiple iterations of the same product vision, from a full-stack app to a polished breach-remediation experience and a separate design system for the UI.
 
-<img src="/public/img/GA-Cover.png">
+## What’s in this repo
 
-## Upcoming Features
+| Folder | What it is |
+|--------|------------|
+| [`ghost-audit-original/`](ghost-audit-original/) | First full-stack version: Express, MongoDB, accounts, and features like privacy score, knowledge test, IP review, email leak checking, and action items. |
+| [`ghost-audit-demo/`](ghost-audit-demo/) | Current focus: a breach audit and remediation dashboard (React + TypeScript), built to match the product design. Uses **synthetic breach data**, a small Express API, and **local SQLite** so the full flow works end-to-end without paid third-party APIs. (There is no `ghost-audit-2` folder; this replaced that name.) |
+| [`ghost-audit-design-system/`](ghost-audit-design-system/) | UI components and Storybook for Ghost Audit’s visual language—shared building blocks as the product evolves. |
 
-- Social Media Privacy Dashboard: Summary of overall social media privacy health (includes alerts) and notifies the user of how to improve their social media privacy by analyzing metrics such as name, aliases, phone numbers, emails, location data, device data, etc. (but mostly whatever information is available through the Instagram API)
-- Privacy Settings and Guidelines Manager: Focuses specifically on the user’s privacy settings. Let's the user know the impacts of their current privacy settings as well as any updated terms and conditions that would affect the privacy settings of any of the user's accounts
+Each project has its own `package.json` and `node_modules`. Install dependencies inside the folder you want to run.
 
-## Installation
+### ghost-audit-original
 
-1. Clone repo
-2. run `npm install`
+The original implementation of Ghost Audit as a **free, consumer-facing privacy audit**: sign in, run checks, and work through recommendations. It targets the broader privacy story (score, education, IP visibility, email leaks, actionable list) described in [ghost-audit-original/README.md](ghost-audit-original/README.md).
 
-## Usage
+Good starting point if you care about the classic web app, Passport auth, and MongoDB-backed flows.
 
-1. run `node server.js`
-2. Navigate to `localhost:3333`
+### ghost-audit-demo
+
+This is the **data-breach monitor and remediation** experience: search a **demo** email (do not use a real inbox), review synthetic breaches, triage “action required” vs notices, walk checklists, archive resolved items, and use settings/notes.
+
+It exists because **Have I Been Pwned’s API is paid** for typical product use. Rather than gate the project on that cost—or pass fees on to users—I built **`ghost-audit-demo`** to show how Ghost Audit would behave with real breach intelligence: realistic, varied **synthetic records** generated and served by a small Express API, persisted per anonymous browser cookie in SQLite so a shared demo can serve more than one visitor. Swap the catalog layer for a free or self-hosted breach source later; the UI and state machine are meant to stay the same.
+
+More feature detail: [ghost-audit-demo/README.md](ghost-audit-demo/README.md).
+
+### ghost-audit-design-system
+
+Component library and **Storybook** for Ghost Audit—buttons, patterns, and documentation so the product UI stays consistent as features land in `ghost-audit-demo` or a future production app.
+
+---
+
+## Running locally
+
+### ghost-audit-original
+
+```bash
+cd ghost-audit-original
+npm install
+node server.js
+```
+
+- **URL:** [http://localhost:8080](http://localhost:8080) (override with `PORT`, e.g. `PORT=3333 node server.js`)
+- Requires MongoDB and app config under `config/` (see [ghost-audit-original/README.md](ghost-audit-original/README.md)).
+
+### ghost-audit-demo
+
+Runs the Vite frontend and Express API together. Session data is stored in SQLite (`ghost-audit-demo/data/`, gitignored). Use sample addresses such as `jane.demo@ghostaudit.test` — not a real email.
+
+```bash
+cd ghost-audit-demo
+npm install
+npm run dev
+```
+
+| Service | URL |
+|---------|-----|
+| Web app | [http://localhost:5173](http://localhost:5173) |
+| API | [http://localhost:3001](http://localhost:3001) (Vite proxies `/api` here) |
+
+```bash
+npm run dev:client   # Vite only (port 5173)
+npm run dev:server   # API only (port 3001)
+npm run build
+npm run preview
+```
+
+### ghost-audit-design-system
+
+```bash
+cd ghost-audit-design-system
+npm install
+npm run dev          # Vite app → http://localhost:5173
+npm run storybook    # http://localhost:6006
+```
+
+```bash
+npm run build
+npm run build-storybook
+npm run lint
+```
