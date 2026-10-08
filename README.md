@@ -15,12 +15,16 @@ The work here is a real attempt at that idea, not a throwaway mockup: multiple i
 Each project has its own `package.json` and `node_modules`. Install dependencies inside the folder you want to run.
 
 ### ghost-audit-original
+> Access the original platform
+> [here](https://web-production-ba4364.up.railway.app/) 🌱
 
 The original implementation of Ghost Audit as a **free, consumer-facing privacy audit**: sign in, run checks, and work through recommendations. It targets the broader privacy story (score, education, IP visibility, email leaks, actionable list) described in [ghost-audit-original/README.md](ghost-audit-original/README.md).
 
 Good starting point if you care about the classic web app, Passport auth, and MongoDB-backed flows.
 
 ### ghost-audit-demo
+> Access the demo platform
+> [here](https://web-production-87832.up.railway.app) 🚀
 
 This is the **data-breach monitor and remediation** experience: search a **demo** email (do not use a real inbox), review synthetic breaches, triage “action required” vs notices, walk checklists, archive resolved items, and use settings/notes.
 
