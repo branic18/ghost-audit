@@ -45,6 +45,14 @@ export function EmptyStatePanel() {
   );
 }
 
+export function SessionRestorePanel() {
+  return (
+    <div className="state-panel" role="status" aria-live="polite">
+      <p>Restoring your session…</p>
+    </div>
+  );
+}
+
 export function LoadingStatePanel() {
   const [pct, setPct] = useState(8);
 

@@ -1,6 +1,7 @@
 import React, { useId } from 'react';
 import type { BreachRecord } from '../types';
 import { useStore } from '../state/store';
+import AccordionPanel from './AccordionPanel';
 import { ShoppingBagIcon, CheckCircleIcon } from './icons';
 
 interface Props {
@@ -36,13 +37,7 @@ export default function NoticeRow({ record, email }: Props) {
         <span className="record-cell">{record.dataTypes.join(', ')}</span>
       </button>
 
-      <div
-        className={`accordion-panel-wrap${record.isOpen ? ' is-open' : ''}`}
-        aria-hidden={!record.isOpen}
-        inert={!record.isOpen}
-      >
-        <div className="accordion-panel-inner">
-        <div className="accordion-panel accordion-panel--notice" id={panelId}>
+      <AccordionPanel open={record.isOpen} id={panelId} className="accordion-panel accordion-panel--notice">
           <div className="accordion-panel__col">
             <h3>{record.domain.replace(/\.com$/, '')}</h3>
             <p className="breach-meta">
@@ -71,9 +66,7 @@ export default function NoticeRow({ record, email }: Props) {
               Move to Action List
             </button>
           </div>
-        </div>
-        </div>
-      </div>
+      </AccordionPanel>
     </div>
   );
 }

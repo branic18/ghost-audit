@@ -1,6 +1,7 @@
 import React, { useId } from 'react';
 import type { BreachRecord } from '../types';
 import { useStore } from '../state/store';
+import AccordionPanel from './AccordionPanel';
 import Checklist from './Checklist';
 import { ShoppingBagIcon, DollarSignIcon, CheckCircleIcon, SettingsFilledIcon } from './icons';
 
@@ -107,13 +108,7 @@ export default function AccordionRow({ record, email }: Props) {
         </span>
       </button>
 
-      <div
-        className={`accordion-panel-wrap${record.isOpen ? ' is-open' : ''}`}
-        aria-hidden={!record.isOpen}
-        inert={!record.isOpen}
-      >
-        <div className="accordion-panel-inner">
-        <div className="accordion-panel accordion-panel--action" id={panelId}>
+      <AccordionPanel open={record.isOpen} id={panelId} className="accordion-panel accordion-panel--action">
           <div className="accordion-panel__col">
             <h3>{record.domain.replace(/\.com$/, '')}</h3>
             <p className="breach-meta">
@@ -243,9 +238,7 @@ export default function AccordionRow({ record, email }: Props) {
               <p>{record.notesText}</p>
             </div>
           )}
-        </div>
-        </div>
-      </div>
+      </AccordionPanel>
     </div>
   );
 }

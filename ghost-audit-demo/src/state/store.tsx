@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import type {
   BreachRecord,
   DashboardView,
@@ -292,6 +292,7 @@ interface Ctx {
   dispatch: React.Dispatch<Action>;
   pushToast: (title: string, body: string) => void;
   refreshScore: () => Promise<void>;
+  sessionReady: boolean;
 }
 
 const StoreContext = createContext<Ctx | null>(null);
@@ -317,6 +318,7 @@ export function StoreProvider({
 
   const persistTimer = useRef<number | null>(null);
   const hydrated = useRef(Boolean(initialStateOverride));
+  const [sessionReady, setSessionReady] = useState(Boolean(initialStateOverride));
 
   const refreshScore = useCallback(async () => {
     try {
@@ -350,15 +352,17 @@ export function StoreProvider({
     let cancelled = false;
     fetchSessionState()
       .then(({ dashboard, score }) => {
-        if (cancelled || !dashboard) {
-          hydrated.current = true;
-          return;
+        if (cancelled) return;
+        if (dashboard) {
+          dispatch({ type: 'HYDRATE', dashboard, score });
         }
-        dispatch({ type: 'HYDRATE', dashboard, score });
         hydrated.current = true;
+        setSessionReady(true);
       })
       .catch(() => {
+        if (cancelled) return;
         hydrated.current = true;
+        setSessionReady(true);
       });
     return () => {
       cancelled = true;
@@ -366,7 +370,7 @@ export function StoreProvider({
   }, [initialStateOverride]);
 
   useEffect(() => {
-    if (!hydrated.current) return undefined;
+    if (!sessionReady) return undefined;
     if (state.view === 'loading') return undefined;
     if (persistTimer.current) window.clearTimeout(persistTimer.current);
     persistTimer.current = window.setTimeout(() => {
@@ -389,11 +393,12 @@ export function StoreProvider({
     state.theme,
     state.actionSort,
     state.noticeSort,
+    sessionReady,
   ]);
 
   const value = useMemo(
-    () => ({ state, dispatch, pushToast, refreshScore }),
-    [state, pushToast, refreshScore],
+    () => ({ state, dispatch, pushToast, refreshScore, sessionReady }),
+    [state, pushToast, refreshScore, sessionReady],
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;

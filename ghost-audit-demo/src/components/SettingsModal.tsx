@@ -94,7 +94,7 @@ export default function SettingsModal() {
       selection: goal,
       notesText: notesDraft,
     });
-    pushToast('Notes saved', `Your ${record.domain} notes were successfully saved!`);
+    pushToast('Notes saved', `Your ${record?.domain ?? ''} notes were successfully saved!`);
   }
 
   return (

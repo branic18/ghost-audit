@@ -3,7 +3,7 @@ import { useStore } from './state/store';
 import TopBar from './components/TopBar';
 import Banner from './components/Banner';
 import SearchHeader from './components/SearchHeader';
-import { EmptyStatePanel, LoadingStatePanel } from './components/StatePanel';
+import { EmptyStatePanel, LoadingStatePanel, SessionRestorePanel } from './components/StatePanel';
 import ResultsView from './components/ResultsView';
 import ArchivesView from './components/ArchivesView';
 import KnowledgeTest from './components/KnowledgeTest';
@@ -11,7 +11,7 @@ import SettingsModal from './components/SettingsModal';
 import ToastRegion from './components/ToastRegion';
 
 export default function App() {
-  const { state } = useStore();
+  const { state, sessionReady } = useStore();
   const onTest = state.view === 'knowledge-test';
 
   useEffect(() => {
@@ -24,7 +24,11 @@ export default function App() {
         Skip to main content
       </a>
       <TopBar />
-      {onTest ? (
+      {!sessionReady ? (
+        <main id="main-content">
+          <SessionRestorePanel />
+        </main>
+      ) : onTest ? (
         <KnowledgeTest />
       ) : (
         <>
